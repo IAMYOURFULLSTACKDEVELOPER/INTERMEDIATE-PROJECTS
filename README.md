@@ -1,23 +1,23 @@
-# ContentIQ — AI Content Dashboard
+ContentIQ — AI Content Dashboard
 
 A React analytics dashboard with AI-powered insights, interactive charts, and one-click CSV/PDF export. Built with Recharts and the Anthropic Claude API.
 
 ---
 
-## Features
+ Features
 
-- **4-tab navigation** — Overview, Channels, Content, AI Insights
-- **Live AI analysis** — Streams real-time insights from Claude (claude-sonnet-4) about your content data
-- **Interactive charts** — Area, bar, pie, and line charts via Recharts
-- **Traffic channel breakdown** — Donut chart + horizontal bar view of source distribution
-- **Top content table** — Ranked articles with engagement progress bars
-- **CSV export** — Downloads monthly performance as a spreadsheet
-- **PDF export** — Generates a print-ready HTML report with all metrics and tables
-- **Dark/light mode** — Automatically follows system preference via CSS variables
+- 4-tab navigation— Overview, Channels, Content, AI Insights
+- Live AI analysis — Streams real-time insights from Claude (claude-sonnet-4) about your content data
+- Interactive charts — Area, bar, pie, and line charts via Recharts
+- Traffic channel breakdown — Donut chart + horizontal bar view of source distribution
+- Top content table — Ranked articles with engagement progress bars
+- CSV export — Downloads monthly performance as a spreadsheet
+- PDF export — Generates a print-ready HTML report with all metrics and tables
+- Dark/light mode — Automatically follows system preference via CSS variables
 
 ---
 
-## Tech Stack
+ Tech Stack:-
 
 | Layer | Technology |
 |---|---|
@@ -29,63 +29,63 @@ A React analytics dashboard with AI-powered insights, interactive charts, and on
 
 ---
 
-## Project Structure
+ Project Structure
 
 ```
-AIContentDashboard.jsx   # Single-file React component
-README.md                # This file
+AIContentDashboard.jsx   :- Single-file React component
+README.md                :- This file
 ```
 
 The entire dashboard lives in one `.jsx` file, structured as:
 
 ```
-App                        # Root — nav bar, tab routing, export buttons
-├── Stat                   # Metric card (value + % change indicator)
-├── AIInsightPanel         # Claude API streaming insight panel
+App                        :- Root — nav bar, tab routing, export buttons
+├── Stat                   :- Metric card (value + % change indicator)
+├── AIInsightPanel         :- Claude API streaming insight panel
 │   ├── Quick-prompt pills
 │   ├── Streaming text output
 │   └── Custom question input
 └── Tab views
-    ├── Overview           # Area chart + bar chart + AIInsightPanel
-    ├── Channels           # Pie chart + channel breakdown bars
-    ├── Content            # Top content table with engagement bars
-    └── AI Insights        # Full-screen AIInsightPanel
+    ├── Overview           :- Area chart + bar chart + AIInsightPanel
+    ├── Channels           :- Pie chart + channel breakdown bars
+    ├── Content            :- Top content table with engagement bars
+    └── AI Insights        :- Full-screen AIInsightPanel
 ```
 
 ---
 
-## Getting Started
+Getting Started
 
-### Prerequisites
+ Prerequisites
 
 - Node.js 18+
 - An Anthropic API key — get one at [console.anthropic.com](https://console.anthropic.com)
 
-### Installation
+:- Installation
 
 ```bash
-# 1. Create a new React app (or add to an existing one)
+NO:-1. Create a new React app (or add to an existing one)
 npx create-react-app contentiq
 cd contentiq
 
-# 2. Install dependencies
+NO:-2. Install dependencies
 npm install recharts
 
-# 3. Drop in the component
+NO:- 3. Drop in the component
 cp AIContentDashboard.jsx src/App.jsx
 
-# 4. Start the dev server
+NO:- 4. Start the dev server
 npm start
 ```
 
-### API Key Setup
+NO:- API Key Setup
 
 The dashboard calls `https://api.anthropic.com/v1/messages` directly from the browser. In production you should proxy this through your own backend to keep the key secret.
 
-**For local development**, set the key in a `.env` file and proxy requests through a small Express server:
+For local development, set the key in a `.env` file and proxy requests through a small Express server:
 
 ```bash
-# .env
+ .env
 ANTHROPIC_API_KEY=sk-ant-...
 ```
 
@@ -115,22 +115,12 @@ Then in `AIInsightPanel`, change the fetch URL from `https://api.anthropic.com/v
 
 ---
 
-## Connecting Real Data
+ Connecting Real Data
 
-All mock data lives in the `MOCK_DATA` constant near the top of the file. Replace it with your own API calls:
+ Replace it with your own API calls:
 
-```js
-// Example: fetch from your backend
-const [data, setData] = useState(null);
 
-useEffect(() => {
-  fetch('/api/analytics?period=year')
-    .then(r => r.json())
-    .then(setData);
-}, []);
-```
-
-### Expected data shape
+ Expected data shape
 
 ```js
 {
@@ -161,18 +151,18 @@ useEffect(() => {
 
 ---
 
-## AI Insights Panel
+ AI Insights Panel
 
 The `AIInsightPanel` component sends your full dataset to Claude with each request and streams the response token-by-token using the Anthropic SSE streaming API.
 
-**Built-in quick prompts:**
+Built-in quick prompts:
 - "Summarize trends and give 3 actionable recommendations" (default on load)
 - "What's driving the Q4 spike?"
 - "Which channel should we invest more in?"
 - "Predict next quarter's performance."
 - "What content type should we create more of?"
 
-**Custom questions** — the free-text input at the bottom lets users ask anything. Press Enter or click Ask.
+Custom questions — the free-text input at the bottom lets users ask anything. Press Enter or click Ask.
 
 To change the AI's persona or focus area, edit the `systemPrompt` string inside `AIInsightPanel`:
 
@@ -182,13 +172,13 @@ const systemPrompt = `You are a senior content analytics strategist...`;
 
 ---
 
-## Export Details
+ Export Details
 
-### CSV export
+ CSV export
 
 Downloads `content-analytics.csv` with columns: Month, Views, Engagements, Conversions. Covers all months in `data.overview`.
 
-### PDF export
+ PDF export
 
 Opens a new tab with a styled HTML report, then triggers `window.print()`. The report includes:
 - Summary metric cards
@@ -200,7 +190,7 @@ The browser's native print dialog handles paper size and margins. Save as PDF fr
 
 ---
 
-## Customization
+ Customization
 
 | What | Where |
 |---|---|
@@ -213,7 +203,7 @@ The browser's native print dialog handles paper size and margins. Save as PDF fr
 
 ---
 
-## Browser Support
+ Browser Support
 
 Requires a browser with support for:
 - `ReadableStream` / `getReader()` — for SSE streaming (all modern browsers)
@@ -224,6 +214,6 @@ Tested on Chrome 120+, Firefox 121+, Safari 17+.
 
 ---
 
-## License
+ License
 
 MIT — use freely, attribution appreciated.
